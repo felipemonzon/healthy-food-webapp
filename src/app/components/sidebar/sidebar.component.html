@@ -1,0 +1,122 @@
+<div class="sidebar" data-color="black">
+    <div class="sidebar-wrapper">
+        <div class="logo">
+            <a href="#" class="simple-text ml-5">
+                SGAN
+            </a>
+        </div>
+        <ul class="nav">
+            <li class="nav-item">
+                <a class="nav-link" href="../dashboard.html">
+                    <i class="fas fa-chart-pie"></i>
+                    <p>Dashboard</p>
+                </a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" data-toggle="collapse" href="#frmCompra">
+                    <i class="fas fa-calendar-alt"></i>
+                    <p>Citas<b class="caret"></b></p>
+                </a>
+                <div class="collapse" id="frmCompra">
+                    <ul class="nav">
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">
+                                <span class="sidebar-normal">Agendar</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">
+                                <span class="sidebar-normal">Consultar Citas</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" data-toggle="collapse" href="#frmCatalog">
+                    <i class="fas fa-archive"></i>
+                    <p>Catalogos<b class="caret"></b></p>
+                </a>
+                <div class="collapse" id="frmCatalog">
+                    <ul class="nav">
+                        <li class="nav-item">
+                            <a class="nav-link" [routerLink]="['/menu/offices/retrieve']">
+                                <span class="sidebar-normal">Sucursales</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" [routerLink]="['/menu/suppliers/retrieve']">
+                                <span class="sidebar-normal">Proveedores</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="#">
+                                <span class="sidebar-normal">Clientes</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" data-toggle="collapse" href="#frmAdministration">
+                    <i class="fas fa-cogs"></i>
+                    <p>Administración<b class="caret"></b></p>
+                </a>
+                <div class="collapse" id="frmAdministration">
+                    <ul class="nav">
+                        <li class="nav-item">
+                            <a class="nav-link" href="../tables/regular.html">
+                                <span class="sidebar-normal">Usuarios</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="../tables/extended.html">
+                                <span class="sidebar-normal">Perfiles</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="../tables/bootstrap-table.html">
+                                <span class="sidebar-normal">Promociones</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" [routerLink]="['/menu/parameters/retrieve']">
+                                <span class="sidebar-normal">Párametros</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" [routerLink]="['/menu/units/retrieve']">
+                                <span class="sidebar-normal">Unidad de Medida</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" data-toggle="collapse" href="#library">
+                    <i class="fas fa-book"></i>
+                    <p>Reportes<b class="caret"></b></p>
+                </a>
+                <div class="collapse" id="library">
+                    <ul class="nav">
+                        <li class="nav-item">
+                            <a class="nav-link" [routerLink]="['/menu/books/create']">
+                                <span class="sidebar-normal">Citas</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" [routerLink]="['/menu/authors']">
+                                <span class="sidebar-normal">Platillos</span>
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" [routerLink]="['/menu/publishers/retrieve']">
+                                <span class="sidebar-normal">Dietas</span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </li>
+        </ul>
+    </div>
+</div>

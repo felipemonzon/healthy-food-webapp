@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+</head>
+
+<body>
+    <!-- End Google Tag Manager (noscript) -->
+    <div class="wrapper wrapper-full-page">
+        <div class="full-page  section-image" data-color="black">
+            <!--   you can change the color of the filter page using: data-color="blue | purple | green | orange | red | rose " -->
+            <div class="content">
+                <div class="container">
+                    <div class="col-lg-4 col-sm-8 ml-auto mr-auto">
+                        <form class="form" [formGroup]="loginForm" novalidate>
+                            <div class="card card-login">
+                                <div class="card-header">
+                                    <h3 class="header text-center">Login</h3>
+                                </div>
+                                <div class="card-body">
+                                    <div class="card-body">
+                                        <div class="form-group">
+                                            <label>User</label>
+                                            <input type="text" class="form-control text-none form-control" formControlName="username" placeholder="Enter username" [class.is-invalid]="form.username.invalid && form.username.touched" autocomplete="off" autofocus>
+                                            <ng-template [ngIf]="form.username.invalid && form.username.touched">
+                                                <div class="bg-danger text-white p-1 mt-2">
+                                                    <p>¡El usuario es requerido!</p>
+                                                </div>
+                                            </ng-template>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Password</label>
+                                            <input type="password" class="form-control" placeholder="Password" formControlName="password" [class.is-invalid]="form.password.invalid && form.password.touched" autocomplete="off">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card-footer ml-auto mr-auto">
+                                    <button type="button" class="btn btn-secondary btn-wd" (click)="login()">Login</button>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <footer class="footer">
+            <div class="container">
+                <nav>
+                    <p class="copyright text-right">
+                        © {{ year | date:'yyyy' }} All Rights Reserved.
+                    </p>
+                </nav>
+            </div>
+        </footer>
+    </div>
+</body>
+
+</html>

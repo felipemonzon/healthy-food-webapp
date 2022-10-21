@@ -1,0 +1,38 @@
+<div class="container">
+    <form class="offset-xl-1 col-xl-10" [formGroup]="frmSupplier" novalidate>
+        <ng-template [ngIf]="isUpdate">
+            <div class="form-group row">
+                <label class="col-md-4" for="id">*Id:</label>
+                <input type="id" class="form-control col-md-8" formControlName="id" readonly>
+            </div>
+        </ng-template>
+        <div class="form-group row">
+            <label class="col-md-4" for="name">*Nombre:</label>
+            <input type="text" class="form-control col-md-8" #name formControlName="name" autocomplete="off" [ngClass]="{ 'is-invalid': isValid && form.name.errors}" appLetterNumberOnlyDirective maxlength="50">
+        </div>
+        <div class="form-group row">
+            <label class="col-md-4" for="name">*RFC:</label>
+            <input type="text" class="form-control col-md-8" #name formControlName="rfc" autocomplete="off" [ngClass]="{ 'is-invalid': isValid && form.rfc.errors}" appLetterNumberOnlyDirective maxlength="20">
+        </div>
+        <div class="form-group row">
+            <label class="col-md-4" for="name">*Razón Social:</label>
+            <input type="text" class="form-control col-md-8" #name formControlName="enterprise" autocomplete="off" [ngClass]="{ 'is-invalid': isValid && form.enterprise.errors}" appLetterNumberOnlyDirective maxlength="100">
+        </div>
+        <div class="form-group row">
+            <label class="col-md-4" for="address">*Dirección:</label>
+            <input type="text" class="form-control col-md-8" formControlName="address" autocomplete="off" [ngClass]="{ 'is-invalid': isValid && form.address.errors}" appLetterNumberOnlyDirective maxlength="100">
+        </div>
+        <div class="form-group row">
+            <label class="col-md-4" for="phone">*Teléfono:</label>
+            <input type="text" class="form-control col-md-8" formControlName="phone" autocomplete="off" appNumberOnlyDirective maxlength="10" [ngClass]="{'is-invalid': isValid && form.phone.errors}">
+        </div>
+        <div class="form-group row">
+            <label class="col-md-4" for="comments">Observaciones:</label>
+            <textarea class="form-control" formControlName="comments" appLetterNumberOnlyDirective rows="5"></textarea>
+        </div>
+        <div class="form-group mt-5 text-center">
+            <button type="button" class="btn btn-primary btn-lg" (click)="save()">Guardar</button>
+        </div>
+    </form>
+    <p class="text-muted">Los datos con (*) son obligatorios</p>
+</div>

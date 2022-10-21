@@ -1,0 +1,66 @@
+<div class="container-fluid mb-3">
+    <h2 class="h3 text-center text-capitalize">Administración de Unidades</h2>
+    <hr>
+    <div class="d-lg-flex">
+        <div class="flex-fill">
+            <div class="form-group">
+                <div class="input-group mb-3">
+                    <input type="text" class="form-control col-md-8 col-lg-4 font-weight-bold" #search maxlength="50" placeholder="Buscar" autocomplete="off">
+                    <div class="input-group-append">
+                        <button class="btn btn-info" type="button" #btnSearch (click)="searchBy()">
+                            <i class="fas fa-search"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="justify-content-xl-end d-none">
+            <button type="button" class="btn btn-secondary mb-1 align-items-end flex-column" (click)="openModal()">
+                <span class="fa fa-plus"></span>
+            </button>
+        </div>
+        <div class="justify-content-xl-end">
+            <button type="button" class="btn btn-secondary mb-1 align-items-end flex-column" (click)="openModal()">
+                <span class="fa fa-plus"></span>
+            </button>
+        </div>
+    </div>
+    <div class="table-responsive">
+        <table class="table table-striped table-bordered bg-black">
+            <caption>Lista de Unidades</caption>
+            <thead>
+                <tr>
+                    <th scope="col" class="text-center text-uppercase">Id</th>
+                    <th scope="col" class="text-center text-uppercase">Nombre</th>
+                    <th scope="col" class="text-center text-uppercase">Abreviatura</th>
+                    <th scope="col" class="text-center text-uppercase">Status</th>
+                    <th scope="col" class="text-center text-uppercase" colspan="2">Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngIf="units.length === 0">
+                    <td colspan="9" class="text-center">No hay Unidades de Medida Disponibles</td>
+                </tr>
+                <tr *ngFor="let unit of units | slice: (page-1) * pageSize : page * pageSize">
+                    <td class="text-center">{{unit.id}}</td>
+                    <td class="text-center">{{unit.name}}</td>
+                    <td class="text-center">{{unit.abbreviation}}</td>
+                    <td class="d-none">{{unit.status}}</td>
+                    <td class="text-center">
+                        <span class="fas" [ngClass]="unit.status ? 'fa-check-circle text-success' : 'fa-times-circle text-danger'"></span>
+                    </td>
+                    <td class="text-center">
+                        <span class="fas fa-edit text-primary mr-4" (click)="update(unit)"></span>
+                        <span class="fas fa-trash text-danger" (click)="delete(unit.id)"></span>
+                    </td>
+                </tr>
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td colspan="10">Total: {{units.length}}</td>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+    <ngb-pagination class="d-flex justify-content-center font-weight-bold" [(page)]="page" [pageSize]="pageSize" [collectionSize]="units.length"></ngb-pagination>
+</div>

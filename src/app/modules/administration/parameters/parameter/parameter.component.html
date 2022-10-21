@@ -1,0 +1,20 @@
+<div class="container">
+    <form class="offset-xl-1 col-xl-10" [formGroup]="frmParameter" novalidate>
+        <div class="form-group row">
+            <label class="col-md-4" for="id">*Clave:</label>
+            <input type="text" class="form-control col-md-8" #id formControlName="id" autocomplete="off" [ngClass]="{ 'is-invalid': isValid && form.id.errors}" appLetterNumberOnlyDirective maxlength="50">
+        </div>
+        <div class="form-group row">
+            <label class="col-md-4" for="description">*Descripción:</label>
+            <input type="text" class="form-control col-md-8" formControlName="description" autocomplete="off" [ngClass]="{ 'is-invalid': isValid && form.description.errors}" appLetterNumberOnlyDirective maxlength="100">
+        </div>
+        <div class="form-group row">
+            <label class="col-md-4" for="value">*Valor:</label>
+            <input type="text" class="form-control col-md-8" formControlName="value" autocomplete="off" appNumberOnlyDirective maxlength="10" [ngClass]="{'is-invalid': isValid && form.value.errors}">
+        </div>
+        <div class="form-group mt-5 text-center">
+            <button type="button" class="btn btn-primary btn-lg" (click)="save()">Guardar</button>
+        </div>
+    </form>
+    <p class="text-muted">Los datos con (*) son obligatorios</p>
+</div>

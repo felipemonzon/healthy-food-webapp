@@ -1,0 +1,56 @@
+<div class="container-fluid mb-3">
+    <h2 class="h3 text-center text-capitalize">Administración de Sucursales</h2>
+    <hr>
+    <div class="d-lg-flex">
+        <div class="flex-fill">
+            <div class="form-group">
+                <div class="input-group mb-3">
+                    <input type="text" class="form-control col-md-8 col-lg-4 font-weight-bold" #search maxlength="50" placeholder="Buscar" autocomplete="off">
+                    <div class="input-group-append">
+                        <button class="btn btn-info" type="button" #btnSearch (click)="searchBy()">
+                            <i class="fas fa-search"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="justify-content-xl-end">
+            <button type="button" class="btn btn-secondary mb-1 align-items-end flex-column" (click)="openModal()">
+                <span class="fa fa-plus"></span>
+            </button>
+        </div>
+    </div>
+    <div class="table-responsive">
+        <table class="table table-stripped table-bordered bg-black">
+            <caption>Lista de Sucursales</caption>
+            <thead>
+                <tr>
+                    <th scope="col" class="text-center text-uppercase">Id</th>
+                    <th scope="col" class="text-center text-uppercase">Nombre</th>
+                    <th scope="col" class="text-center text-uppercase">Direccion</th>
+                    <th scope="col" class="text-center text-uppercase">Teléfono</th>
+                    <th scope="col" class="text-center text-uppercase">Encargado</th>
+                    <th scope="col" class="text-center text-uppercase" colspan="2">Acciones</th>
+                </tr>
+            </thead>
+            <tbody *ngFor="let office of offices | slice: (page-1) * pageSize : page * pageSize">
+                <tr>
+                    <td>{{office.id}}</td>
+                    <td class="text-center">{{office.name}}</td>
+                    <td class="text-center">{{office.address}}</td>
+                    <td class="text-center">{{office.phone}}</td>
+                    <td class="text-center">{{office.manager.firstName}} {{office.manager.lastName}}</td>
+                    <td class="td-actions text-center">
+                        <a class="btn btn-success btn-simple btn-xs" placement="bottom" ngbTooltip="Edit Office">
+                            <i class="fa fa-edit" (click)="update(office)"></i>
+                        </a>
+                        <a class="btn btn-danger btn-simple btn-xs" placement="bottom" ngbTooltip="Remove Office">
+                            <i class="fa fa-times"></i>
+                        </a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    <ngb-pagination class="d-flex justify-content-center font-weight-bold" [(page)]="page" [pageSize]="pageSize" [collectionSize]="offices.length"></ngb-pagination>
+</div>

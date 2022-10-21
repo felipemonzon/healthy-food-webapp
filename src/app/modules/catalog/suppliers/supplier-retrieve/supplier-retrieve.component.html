@@ -1,0 +1,69 @@
+<div class="container-fluid mb-3">
+    <h2 class="h3 text-center text-capitalize">Administración de Proveedores</h2>
+    <hr>
+    <div class="d-lg-flex">
+        <div class="flex-fill">
+            <div class="form-group">
+                <div class="input-group mb-3">
+                    <input type="text" class="form-control col-md-8 col-lg-4 font-weight-bold" #search maxlength="50" placeholder="Buscar" autocomplete="off">
+                    <div class="input-group-append">
+                        <button class="btn btn-info" type="button" #btnSearch (click)="searchBy()">
+                            <i class="fas fa-search"></i>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="justify-content-xl-end">
+            <button type="button" class="btn btn-secondary mb-1 align-items-end flex-column" (click)="openModal()">
+                <span class="fa fa-plus"></span>
+            </button>
+        </div>
+    </div>
+    <div class="table-responsive">
+        <table class="table table-striped table-bordered bg-black">
+            <caption>Lista de Proveedores</caption>
+            <thead>
+                <tr>
+                    <th scope="col" class="text-center text-uppercase">Id</th>
+                    <th scope="col" class="text-center text-uppercase">Nombre</th>
+                    <th scope="col" class="text-center text-uppercase">Raazón Social</th>
+                    <th scope="col" class="text-center text-uppercase">RFC</th>
+                    <th scope="col" class="text-center text-uppercase">Teléfono</th>
+                    <th scope="col" class="text-center text-uppercase">Dirección</th>
+                    <th scope="col" class="text-center text-uppercase">Observaciones</th>
+                    <th scope="col" class="text-center text-uppercase">Status</th>
+                    <th scope="col" class="text-center text-uppercase" colspan="2">Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngIf="suppliers.length === 0">
+                    <td colspan="9" class="text-center">No hay Proveedores Disponibles</td>
+                </tr>
+                <tr *ngFor="let supplier of suppliers | slice: (page-1) * pageSize : page * pageSize">
+                    <td class="text-center">{{supplier.id}}</td>
+                    <td class="text-center">{{supplier.name}}</td>
+                    <td class="text-center">{{supplier.enterprise}}</td>
+                    <td class="text-center">{{supplier.rfc}}</td>
+                    <td class="text-center">{{supplier.phone}}</td>
+                    <td class="text-center">{{supplier.address}}</td>
+                    <td class="text-center">{{supplier.comments}}</td>
+                    <td class="d-none">{{supplier.status}}</td>
+                    <td class="text-center">
+                        <span class="fas" [ngClass]="supplier.status ? 'fa-check-circle text-success' : 'fa-times-circle text-danger'"></span>
+                    </td>
+                    <td class="text-center">
+                        <span class="fas fa-edit text-primary mr-4" (click)="update(supplier)"></span>
+                        <span class="fas fa-trash text-danger" (click)="delete(supplier.id)"></span>
+                    </td>
+                </tr>
+            </tbody>
+            <tfoot>
+                <tr>
+                    <td colspan="10">Total: {{suppliers.length}}</td>
+                </tr>
+            </tfoot>
+        </table>
+    </div>
+    <ngb-pagination class="d-flex justify-content-center font-weight-bold" [(page)]="page" [pageSize]="pageSize" [collectionSize]="suppliers.length"></ngb-pagination>
+</div>

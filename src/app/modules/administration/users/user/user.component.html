@@ -1,1 +1,55 @@
-<p>user works!</p>
+<div class="container">
+    <form class="offset-xl-1 col-xl-10" [formGroup]="frmUser" novalidate>
+        <ng-template [ngIf]="isUpdate">
+            <div class="form-group row">
+                <label class="col-md-4" for="id">*Id:</label>
+                <input type="id" class="form-control col-md-8" formControlName="id" readonly>
+            </div>
+        </ng-template>
+        <div class="form-group row">
+            <label class="col-md-4" for="firstName">*Nombre:</label>
+            <input type="text" class="form-control col-md-8" #firstName formControlName="firstName" autocomplete="off" [ngClass]="{ 'is-invalid': isValid && form.firstName.errors}" appLetterOnlyDirective maxlength="50">
+        </div>
+        <div class="form-group row">
+            <label class="col-md-4" for="lastName">*Apellidos:</label>
+            <input type="text" class="form-control col-md-8" formControlName="lastName" autocomplete="off" [ngClass]="{ 'is-invalid': isValid && form.lastName.errors}" appLetterOnlyDirective maxlength="50">
+        </div>
+        <div class="form-group row">
+            <label class="col-md-4" for="genre">*Genero:</label>
+            <ng-select class="form-control col-md-8" [selectOnTab]="true" labelForId="genre" placeholder="Seleccione" formControlName="genre" [ngClass]="{ 'is-invalid': isValid && form.genre.errors}">
+                <ng-option value="MALE">Masculino</ng-option>
+                <ng-option value="FEMALE">Femenino</ng-option>
+            </ng-select>
+        </div>
+        <div class="form-group row">
+            <label class="col-md-4" for="idBranchOffice">*Sucursal:</label>
+            <ng-select class="form-control col-md-8" [selectOnTab]="true" bindValue="id" labelForId="idBranchOffice" placeholder="Seleccione" formControlName="idBranchOffice" [ngClass]="{ 'is-invalid': isValid && form.idBranchOffice.errors}">
+                <ng-option *ngFor="let office of offices" [value]="office.id">{{office.name}}</ng-option>
+            </ng-select>
+        </div>
+        <div class="form-group row">
+            <label class="col-md-4" for="phone">*Teléfono:</label>
+            <input type="text" class="form-control col-md-8" [ngClass]="{'is-invalid': isValid && form.phone.errors}" #phone formControlName="phone" autocomplete="off" appNumberOnlyDirective maxlength="10">
+        </div>
+        <div class="form-group row">
+            <label class="col-md-4" for="email">*E-mail:</label>
+            <input type="text" class="form-control col-md-8" formControlName="email" autocomplete="off" [ngClass]="{ 'is-invalid': isValid && form.email.errors}">
+        </div>
+        <ng-template [ngIf]="addPasswordControl()">
+            <div class="form-group row">
+                <label class="col-md-4" for="password">*Contraseña:</label>
+                <input type="password" class="form-control col-md-8" formControlName="password" [ngClass]="{ 'is-invalid': isValid && form.password.errors}" autocomplete="off" maxlength="100">
+            </div>
+        </ng-template>
+        <div class="form-group row">
+            <label class="col-md-4" for="authorities">*Perfil:</label>
+            <ng-select class="form-control col-md-8" formControlName="authorities" [selectOnTab]="true" bindValue="id" labelForId="authorities" placeholder="Seleccione" [multiple]="true">
+                <ng-option *ngFor="let authority of authorities" [value]="authority.id">{{authority.value}}</ng-option>
+            </ng-select>
+        </div>
+        <div class="form-group mt-5 text-center">
+            <button type="button" class="btn btn-primary btn-lg" (click)="saveUser()">Guardar</button>
+        </div>
+    </form>
+    <p class="text-muted">Los datos con (*) son obligatorios</p>
+</div>

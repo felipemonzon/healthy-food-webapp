@@ -31,7 +31,6 @@ export class OfficesRetrieveComponent implements OnInit {
    * @param modalService servicio para la modal
    */
   constructor(private officeService: OfficeService,
-    private formBuilder: FormBuilder,
     private modalService: NgbModal) { }
 
   /**

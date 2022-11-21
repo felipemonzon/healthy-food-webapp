@@ -29,6 +29,8 @@ import { UnitComponent } from './modules/administration/units/unit/unit.componen
 import { UnitRetrieveComponent } from './modules/administration/units/unit-retrieve/unit-retrieve.component';
 import { UserComponent } from './modules/administration/users/user/user.component';
 import { UserRetrieveComponent } from './modules/administration/users/user-retrieve/user-retrieve.component';
+import { ProfileComponent } from './modules/administration/profiles/profile/profile.component';
+import { ProfileRetrieveComponent } from './modules/administration/profiles/profile-retrieve/profile-retrieve.component';
 
 @NgModule({
   declarations: [
@@ -50,7 +52,9 @@ import { UserRetrieveComponent } from './modules/administration/users/user-retri
     UnitComponent,
     UnitRetrieveComponent,
     UserComponent,
-    UserRetrieveComponent
+    UserRetrieveComponent,
+    ProfileComponent,
+    ProfileRetrieveComponent
   ],
   imports: [
     BrowserModule,

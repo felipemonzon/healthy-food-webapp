@@ -11,8 +11,10 @@ export const environment = {
   units: '/units',
   parameters: '/parameters',
   users: '/users',
+  profiles: '/profiles',
   retrieve: '/retrieve',
-  create: '/create'
+  create: '/create',
+  initial: '/initial'
 };
 
 /*

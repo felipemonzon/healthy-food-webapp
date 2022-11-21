@@ -3,7 +3,7 @@ import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { OfficeModel } from 'src/app/models/catalog/office.model';
 import { UserModel } from 'src/app/models/security/user-model';
 import { OfficeService } from 'src/app/services/catalogs/office.service';
-import { UserService } from 'src/app/services/catalogs/user.service';
+import { UserService } from 'src/app/services/configuration/user.service';
 
 @Component({
   selector: 'app-office',
@@ -71,7 +71,7 @@ export class OfficeComponent implements OnInit {
       name: ["", [Validators.required]],
       phone: ["", [Validators.required]],
       address: ["", [Validators.required]],
-      idManager: ["0", [Validators.required]],
+      idManager: [null, [Validators.required]],
     });
   }
 
@@ -80,13 +80,16 @@ export class OfficeComponent implements OnInit {
    *
    * @param office datos de la sucursal
    */
-  private updateData(office: OfficeModel) {
+  private updateData(office: OfficeModel) {    
     this.frmOffice = this.formBuilder.group({
       id: [office.id],
       name: [office.name, [Validators.required]],
       phone: [office.phone, [Validators.required]],
       address: [office.address, [Validators.required]],
-      idManager: [office.manager.id, [Validators.required]],
+      idManager: [null, [Validators.required]],
     });
+    setTimeout(() => {
+      this.form.idManager.setValue(office.managerId);
+    }, 100);
   }
 }

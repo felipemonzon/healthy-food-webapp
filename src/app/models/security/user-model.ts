@@ -1,3 +1,5 @@
+import { AuthorityModel } from "../administration/authority.model";
+
 export interface UserModel {
     id: string;
     username: string;
@@ -8,4 +10,8 @@ export interface UserModel {
     email: string;
     genre: string;
     active: boolean;
+    authorities: AuthorityModel[];
+    branchOfficeName: string;
+    branchOfficeId: number;
+    profiles: AuthorityModel[];
 }

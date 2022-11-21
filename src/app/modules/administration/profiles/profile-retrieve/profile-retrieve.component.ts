@@ -2,40 +2,41 @@ import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { FormGroup, FormBuilder } from '@angular/forms';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ModalComponent } from 'src/app/components/modal/modal.component';
-import { UserModel } from 'src/app/models/security/user-model';
+import { AuthorityModel } from 'src/app/models/administration/authority.model';
+import { ProfileService } from 'src/app/services/configuration/profile.service';
 import { UserService } from 'src/app/services/configuration/user.service';
 import { MessagesConstant } from 'src/app/utils/messages-constants';
 import { MessagingNotification } from 'src/app/utils/messaging-notification';
-import { UserComponent } from '../user/user.component';
+import { ProfileComponent } from '../profile/profile.component';
 
 @Component({
-  selector: 'app-user-retrieve',
-  templateUrl: './user-retrieve.component.html',
+  selector: 'app-profile-retrieve',
+  templateUrl: './profile-retrieve.component.html',
   styles: [
   ]
 })
-export class UserRetrieveComponent implements OnInit {
+export class ProfileRetrieveComponent implements OnInit {
   @ViewChild("btnSearch", { static: true })
   public btnSearch!: ElementRef;
   @ViewChild("search", { static: true })
   public search!: ElementRef;
   frmSearch: FormGroup = new FormGroup({});
 
-  users: UserModel[] = [];
+  profiles: AuthorityModel[] = [];
   pageSize = 10;
   page: number = 1;
 
   constructor(
-    private userService: UserService,
+    private profileService: ProfileService,
     private formBuilder: FormBuilder,
     private modalService: NgbModal
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     this.frmSearch = this.formBuilder.group({
       search: [""],
     });
-    this.userRetrieve();
+    this.profilesRetrieve();
   }
 
   ngAfterViewInit() {
@@ -47,20 +48,20 @@ export class UserRetrieveComponent implements OnInit {
   searchBy(): any {
     let search = this.search.nativeElement.value;
     if (search !== "") {
-      this.userService.findUserBy(search.trim()).subscribe((response) => {
-        this.users = response;
+      this.profileService.findProfileBy(search.trim()).subscribe((response) => {
+        this.profiles = response;
       });
     } else {
-      this.userRetrieve();
+      this.profilesRetrieve();
     }
   }
 
   openModal() {
-    this.createModal("Registrar Usuario");
+    this.createModal("Registrar Perfile");
   }
 
-  update(user: UserModel) {
-    this.createModal("Actualizar Usuario", user);
+  update(profile: AuthorityModel) {
+    this.createModal("Actualizar Perfil", profile);
   }
 
   delete(id: string) {
@@ -70,17 +71,17 @@ export class UserRetrieveComponent implements OnInit {
       MessagesConstant.DELETE_USER_QUESTION
     ).then((response) => {
       if (response) {
-        this.userService.delete(id);
+        //this.userService.delete(id);
       }
     });
   }
 
   /**
-   * Consulta todos los usuarios.
+   * Consulta todos los perfiles.
    */
-  private userRetrieve() {
-    this.userService.getAlUser().subscribe((response) => {
-      this.users = response;
+  private profilesRetrieve() {
+    this.profileService.getAlProfile().subscribe((response) => {
+      this.profiles = response;
     });
   }
 
@@ -88,14 +89,14 @@ export class UserRetrieveComponent implements OnInit {
    * Genera el componente modal.
    *
    * @param title titulo de la modal
-   * @param user usuario a editar, nulo si es para registrar
+   * @param user perfile a editar, nulo si es para registrar
    */
-  private createModal(title: string, user?: UserModel) {
+  private createModal(title: string, user?: AuthorityModel) {
     const modalRef = this.modalService.open(ModalComponent, {
       size: "lg",
     });
     modalRef.componentInstance.title = title;
-    modalRef.componentInstance.page = UserComponent;
+    modalRef.componentInstance.page = ProfileComponent;
     modalRef.componentInstance.data = user;
   }
 }

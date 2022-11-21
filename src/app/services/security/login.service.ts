@@ -4,6 +4,7 @@ import { environment } from "src/environments/environment";
 import { Router } from "@angular/router";
 import { map } from "rxjs/operators";
 import { UserModel } from "src/app/models/security/user-model";
+import { AuthorityModel } from "src/app/models/administration/authority.model";
 
 @Injectable({
   providedIn: "root",
@@ -17,6 +18,10 @@ export class LoginService {
    * Authorization header.
    */
   private authorization = "authorization";
+  /**
+   * Propiedad de perfil.
+   */
+  private profile = "profiles";
 
   /**
    * Constructor.
@@ -36,12 +41,16 @@ export class LoginService {
     return this.httpClient
       .post(this.loginUrl, user, { observe: "response" })
       .pipe(
-        map((response: HttpResponse<any>) => {          
+        map((response: HttpResponse<any>) => {    
           localStorage.setItem(
             this.authorization,
             response.headers.get(this.authorization)!
           );
           localStorage.setItem("displayName", response.body.displayName);
+          localStorage.setItem(
+            this.profile,
+            JSON.stringify(response.body.profiles)
+          );
         })
       );
   }
@@ -66,7 +75,7 @@ export class LoginService {
    * valida si esta el token en sesión.
    */
   get isLoggedIn(): boolean {
-    return localStorage.getItem(this.authorization) !== null ? true : false;
+    return localStorage.getItem(this.authorization) !== null;
   }
 
   /**
@@ -77,5 +86,9 @@ export class LoginService {
     if (removeToken == null) {
       this.router.navigate(["login"]);
     }
+  }
+
+  getRoles(): AuthorityModel[] {
+    return JSON.parse(localStorage.getItem(this.profile) as string) as AuthorityModel[];
   }
 }

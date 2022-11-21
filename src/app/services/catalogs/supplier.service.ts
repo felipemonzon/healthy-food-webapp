@@ -16,7 +16,7 @@ export class SupplierService {
    /**
     * Ruta de la API de proveedores
     */
-   private supplierDataPath = `${this.supplierBasePath}/`;;
+   private supplierDataPath = `${this.supplierBasePath}/`;
  
    /** Constructor */
    constructor(private httpClient: HttpClient) {}

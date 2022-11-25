@@ -1,10 +1,8 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { FormGroup, FormBuilder } from '@angular/forms';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ModalComponent } from 'src/app/components/modal/modal.component';
 import { AuthorityModel } from 'src/app/models/administration/authority.model';
 import { ProfileService } from 'src/app/services/configuration/profile.service';
-import { UserService } from 'src/app/services/configuration/user.service';
 import { MessagesConstant } from 'src/app/utils/messages-constants';
 import { MessagingNotification } from 'src/app/utils/messaging-notification';
 import { ProfileComponent } from '../profile/profile.component';
@@ -20,7 +18,6 @@ export class ProfileRetrieveComponent implements OnInit {
   public btnSearch!: ElementRef;
   @ViewChild("search", { static: true })
   public search!: ElementRef;
-  frmSearch: FormGroup = new FormGroup({});
 
   profiles: AuthorityModel[] = [];
   pageSize = 10;
@@ -28,14 +25,10 @@ export class ProfileRetrieveComponent implements OnInit {
 
   constructor(
     private profileService: ProfileService,
-    private formBuilder: FormBuilder,
     private modalService: NgbModal
   ) {}
 
   ngOnInit(): void {
-    this.frmSearch = this.formBuilder.group({
-      search: [""],
-    });
     this.profilesRetrieve();
   }
 

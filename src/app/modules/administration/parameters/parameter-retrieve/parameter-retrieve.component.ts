@@ -1,5 +1,4 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { FormGroup, FormBuilder } from '@angular/forms';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ModalComponent } from 'src/app/components/modal/modal.component';
 import { Parameter } from 'src/app/models/configuration/parameter.model';
@@ -25,7 +24,6 @@ export class ParameterRetrieveComponent implements OnInit {
    */
   @ViewChild("search", { static: true })
   public search!: ElementRef;
-  frmSearch: FormGroup = new FormGroup({});
 
   parameters: Parameter[] = [];
   pageSize = 10;
@@ -33,14 +31,10 @@ export class ParameterRetrieveComponent implements OnInit {
 
   constructor(
     private parameterService: ParameterService,
-    private formBuilder: FormBuilder,
     private modalService: NgbModal
   ) { }
 
   ngOnInit(): void {
-    this.frmSearch = this.formBuilder.group({
-      search: [""],
-    });
     this.parameterRetrieve();
   }
 

@@ -1,5 +1,5 @@
 import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { Validators, FormGroup, FormBuilder } from '@angular/forms';
 import { AuthorityModel } from 'src/app/models/administration/authority.model';
 import { ProfileService } from 'src/app/services/configuration/profile.service';
 

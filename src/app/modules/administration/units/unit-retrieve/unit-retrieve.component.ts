@@ -1,5 +1,4 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
-import { FormGroup, FormBuilder } from '@angular/forms';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ModalComponent } from 'src/app/components/modal/modal.component';
 import { Unit } from 'src/app/models/configuration/unit.model';
@@ -25,7 +24,6 @@ export class UnitRetrieveComponent implements OnInit {
    */
   @ViewChild("search", { static: true })
   public search!: ElementRef;
-  frmSearch: FormGroup = new FormGroup({});
 
   units: Unit[] = [];
   pageSize = 10;
@@ -33,14 +31,10 @@ export class UnitRetrieveComponent implements OnInit {
 
   constructor(
     private unitService: UnitService,
-    private formBuilder: FormBuilder,
     private modalService: NgbModal
   ) { }
 
   ngOnInit(): void {
-    this.frmSearch = this.formBuilder.group({
-      search: [""],
-    });
     this.unitsRetrieve();
   }
 

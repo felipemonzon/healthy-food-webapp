@@ -27,7 +27,6 @@ export class OfficesRetrieveComponent implements OnInit {
    * Constructor de la clase.
    * 
    * @param officeService servicio de oficinas
-   * @param formBuilder constructor de formulario
    * @param modalService servicio para la modal
    */
   constructor(private officeService: OfficeService,

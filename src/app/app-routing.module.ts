@@ -3,7 +3,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { NgxUiLoaderHttpModule, NgxUiLoaderModule } from 'ngx-ui-loader';
 import { MenuComponent } from './components/menu/menu.component';
 import { ngxUiLoaderConfig } from './configs/LoaderConfig';
-import { LoginComponent } from './modules/users/login/login.component';
+import { LoginComponent } from './modules/security/login/login.component';
 import { Role } from './security/enums/Role';
 
 const routes: Routes = [

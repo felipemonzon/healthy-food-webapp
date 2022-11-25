@@ -1,6 +1,6 @@
 {
-    "name": "library-management-webapp",
-    "version": "0.0.0",
+    "name": "healthy-food-management-webapp",
+    "version": "1.0.0",
     "scripts": {
         "ng": "ng",
         "start": "ng serve",
@@ -19,12 +19,17 @@
         "@angular/platform-browser-dynamic": "~12.2.0",
         "@angular/router": "~12.2.0",
         "@fortawesome/fontawesome-free": "^5.15.4",
+        "@fullcalendar/angular": "^5.11.2",
+        "@fullcalendar/bootstrap": "^5.11.3",
+        "@fullcalendar/core": "^5.11.2",
+        "@fullcalendar/daygrid": "^5.11.2",
+        "@fullcalendar/interaction": "^5.11.2",
+        "@fullcalendar/timegrid": "^5.11.2",
         "@ng-bootstrap/ng-bootstrap": "^9.1.2",
         "@ng-select/ng-select": "^8.1.1",
         "@popperjs/core": "^2.9.3",
         "bootstrap": "^4.6.0",
         "bootstrap-fileinput": "^5.2.7",
-        "bootstrap-select": "^1.13.18",
         "jquery": "^3.6.0",
         "ng2-pdf-viewer": "^9.0.0",
         "ngx-ui-loader": "^11.0.0",
@@ -34,7 +39,7 @@
         "zone.js": "~0.11.4"
     },
     "devDependencies": {
-        "@angular-devkit/build-angular": "~12.2.1",
+        "@angular-devkit/build-angular": "^15.0.1",
         "@angular/cli": "~12.2.1",
         "@angular/compiler-cli": "~12.2.0",
         "@angular/localize": "^12.2.15",

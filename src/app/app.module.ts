@@ -11,7 +11,7 @@ import { MenuComponent } from './components/menu/menu.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { HttpInterceptorService } from './interceptors/HttpInterceptorService';
-import { LoginComponent } from './modules/users/login/login.component';
+import { LoginComponent } from './modules/security/login/login.component';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { HttpErrorInterceptor } from './interceptors/HttpErrorInterceptor';
 import { LetterOnlyeDirective } from './directives/letter-only.directive';
@@ -31,6 +31,18 @@ import { UserComponent } from './modules/administration/users/user/user.componen
 import { UserRetrieveComponent } from './modules/administration/users/user-retrieve/user-retrieve.component';
 import { ProfileComponent } from './modules/administration/profiles/profile/profile.component';
 import { ProfileRetrieveComponent } from './modules/administration/profiles/profile-retrieve/profile-retrieve.component';
+import { BookAppointmentComponent } from './modules/booking/book-appointment/book-appointment.component';
+import { BookingComponent } from './modules/booking/booking/booking.component';
+import { FullCalendarModule } from '@fullcalendar/angular';
+import dayGridPlugin from '@fullcalendar/daygrid';
+import timeGridPlugin from '@fullcalendar/timegrid';
+import interactionPlugin from '@fullcalendar/interaction';
+
+FullCalendarModule.registerPlugins([
+  dayGridPlugin,
+  timeGridPlugin,
+  interactionPlugin
+])
 
 @NgModule({
   declarations: [
@@ -54,7 +66,9 @@ import { ProfileRetrieveComponent } from './modules/administration/profiles/prof
     UserComponent,
     UserRetrieveComponent,
     ProfileComponent,
-    ProfileRetrieveComponent
+    ProfileRetrieveComponent,
+    BookAppointmentComponent,
+    BookingComponent
   ],
   imports: [
     BrowserModule,
@@ -66,7 +80,8 @@ import { ProfileRetrieveComponent } from './modules/administration/profiles/prof
     FormsModule,
     HttpClientModule,
     PdfViewerModule,
-    NgSelectModule
+    NgSelectModule,
+    FullCalendarModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: HttpInterceptorService, multi: true},

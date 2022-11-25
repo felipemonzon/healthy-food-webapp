@@ -12,6 +12,7 @@ export const environment = {
   parameters: '/parameters',
   users: '/users',
   profiles: '/profiles',
+  appointments: '/appointments',
   retrieve: '/retrieve',
   create: '/create',
   initial: '/initial'

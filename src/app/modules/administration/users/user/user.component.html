@@ -42,8 +42,8 @@
             </div>
         </ng-template>
         <div class="form-group row">
-            <label class="col-md-4" for="authorities">*Perfil:</label>
-            <ng-select class="form-control col-md-8" formControlName="authorities" [selectOnTab]="true" bindValue="id" labelForId="authorities" placeholder="Seleccione" [multiple]="true">
+            <label class="col-md-4" for="profiles">*Perfil:</label>
+            <ng-select class="form-control col-md-8" formControlName="profiles" [selectOnTab]="true" bindValue="id" labelForId="profiles" placeholder="Seleccione" [multiple]="true">
                 <ng-option *ngFor="let authority of authorities" [value]="authority.id">{{authority.value}}</ng-option>
             </ng-select>
         </div>

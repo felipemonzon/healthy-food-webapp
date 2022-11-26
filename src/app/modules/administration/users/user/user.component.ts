@@ -1,11 +1,12 @@
 import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute } from '@angular/router';
 import { AuthorityModel } from 'src/app/models/administration/authority.model';
 import { OfficeModel } from 'src/app/models/catalog/office.model';
 import { UserModel } from 'src/app/models/security/user-model';
 import { Role } from 'src/app/security/enums/Role';
+import { SecurityUtilities } from 'src/app/security/utils/security.utils';
 import { UserService } from 'src/app/services/configuration/user.service';
-import { LoginService } from 'src/app/services/security/login.service';
 
 @Component({
   selector: 'app-user',
@@ -20,15 +21,13 @@ export class UserComponent implements OnInit {
   user!: UserModel;
   isValid: boolean = false;
   isUpdate: boolean = false;
-  role: string = "";
   frmUser: FormGroup = new FormGroup({});
   offices: OfficeModel[] = [];
   authorities: AuthorityModel[] = [];
 
   constructor(
     private formBuilder: FormBuilder,
-    private userService: UserService,
-    private loginService: LoginService,
+    private userService: UserService
   ) {
     this.userService.initialData().subscribe((response) => {
       this.offices = response.offices;
@@ -56,7 +55,7 @@ export class UserComponent implements OnInit {
     }, 100);
   }
 
-  saveUser() {    
+  saveUser() {        
     if (!this.frmUser.invalid) {
       this.user = this.frmUser.value;
       this.isUpdate
@@ -78,7 +77,7 @@ export class UserComponent implements OnInit {
       phone: ["", [Validators.required]],
       email: ["", [Validators.required, Validators.email]],
       genre: [""],
-      authorities: ["", [Validators.required]]
+      profiles: ["", [Validators.required]]
     });
     this.addPasswordControl();
   }
@@ -97,14 +96,14 @@ export class UserComponent implements OnInit {
       idBranchOffice: [null, [Validators.required]],
       email: [user.email, [Validators.required, Validators.email]],
       genre: [user.genre],
-      authorities: [null, [Validators.required]]
+      profiles: [null, [Validators.required]]
     });
 
     this.addPasswordControl();
 
     setTimeout(() => {
       this.form.idBranchOffice.setValue(user.branchOfficeId);
-      this.form.authorities.setValue(user.authorities.map(x => x.id));
+      this.form.profiles.setValue(user.profiles.map(x => x.id));
     }, 100);
   }
 
@@ -114,7 +113,7 @@ export class UserComponent implements OnInit {
    * @param profiles perfiles del usuario
    */
   addPasswordControl(): boolean{
-    if (this.loginService.getRoles().findIndex((i) => i.name === Role.ADMIN) === 0) {      
+    if (SecurityUtilities.getUser().profiles.findIndex((i) => i.name === Role.ADMIN) === 0) {      
       this.frmUser.addControl("password", new FormControl("", [Validators.required]));
       return true;
     } else {

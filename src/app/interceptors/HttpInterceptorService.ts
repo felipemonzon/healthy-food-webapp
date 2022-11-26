@@ -1,7 +1,7 @@
 import { HttpInterceptor, HttpRequest, HttpHandler, HttpEvent } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { Observable } from "rxjs";
-import { LoginService } from "../services/security/login.service";
+import { SecurityUtilities } from "../security/utils/security.utils";
 
 @Injectable()
 export class HttpInterceptorService implements HttpInterceptor {
@@ -14,7 +14,7 @@ export class HttpInterceptorService implements HttpInterceptor {
      * Constructor e la clase.
      * @param loginService servicio de autenticación
      */
-    constructor(private loginService: LoginService) { }
+    constructor() { }
 
     /**
      * Intercepta las peticiones enviadas al server.
@@ -24,10 +24,9 @@ export class HttpInterceptorService implements HttpInterceptor {
      * @returns next handle
      */
     intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
-        const authToken = this.loginService.getToken();
         request = request.clone({
             setHeaders: {
-                Authorization: `Bearer ${authToken}`,
+                Authorization: `Bearer ${SecurityUtilities.getToken()}`,
             }
         });
         return next.handle(request);

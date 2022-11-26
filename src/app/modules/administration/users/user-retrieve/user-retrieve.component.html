@@ -48,7 +48,7 @@
                     <td class="text-center">{{user.genre}}</td>
                     <td class="text-center">{{user.cel}}</td>
                     <td class="text-center">{{user.email}}</td>
-                    <td class="text-center" *ngFor="let authority of user.authorities">{{authority.value}}</td>
+                    <td class="text-center" *ngFor="let authority of user.profiles">{{authority.value}}</td>
                     <td class="text-center">{{user.branchOfficeName}}</td>
                     <td class="text-center">
                         <span class="fas" [ngClass]="user.active ? 'fa-check-circle text-success' : 'fa-times-circle text-danger'"></span>

@@ -33,6 +33,8 @@ import { ProfileComponent } from './modules/administration/profiles/profile/prof
 import { ProfileRetrieveComponent } from './modules/administration/profiles/profile-retrieve/profile-retrieve.component';
 import { BookAppointmentComponent } from './modules/booking/book-appointment/book-appointment.component';
 import { BookingComponent } from './modules/booking/booking/booking.component';
+import { UserDataComponent } from "./modules/administration/users/profile/profile.component";
+
 import { FullCalendarModule } from '@fullcalendar/angular';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import timeGridPlugin from '@fullcalendar/timegrid';
@@ -68,7 +70,8 @@ FullCalendarModule.registerPlugins([
     ProfileComponent,
     ProfileRetrieveComponent,
     BookAppointmentComponent,
-    BookingComponent
+    BookingComponent,
+    UserDataComponent
   ],
   imports: [
     BrowserModule,

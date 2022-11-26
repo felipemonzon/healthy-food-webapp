@@ -1,0 +1,47 @@
+<div class="container">
+    <h2 class="h3 text-center text-capitalize">Actualizar Datos de Usuario</h2>
+    <hr>
+    <div class="offset-xl-2 col-xl-8">
+        <form [formGroup]="frmUser" novalidate>
+            <div class="form-group">
+                <label for="username">*Usuario:</label>
+                <input type="text" class="form-control" #username formControlName="username" autocomplete="off" [ngClass]="{ 'is-invalid': isValid && form.username.errors}" appLetterOnlyDirective maxlength="50" readonly>
+            </div>
+            <div class="form-group">
+                <label for="firstName">*Nombre:</label>
+                <input type="text" class="form-control" #firstName formControlName="firstName" autocomplete="off" [ngClass]="{ 'is-invalid': isValid && form.firstName.errors}" appLetterOnlyDirective maxlength="50">
+            </div>
+            <div class="form-group">
+                <label for="lastName">*Apellidos:</label>
+                <input type="text" class="form-control" formControlName="lastName" autocomplete="off" [ngClass]="{ 'is-invalid': isValid && form.lastName.errors}" appLetterOnlyDirective maxlength="50">
+            </div>
+            <div class="form-group">
+                <label for="genre">*Genero:</label>
+                <ng-select class="form-control" [selectOnTab]="true" labelForId="genre" placeholder="Seleccione" formControlName="genre" [ngClass]="{ 'is-invalid': isValid && form.genre.errors}">
+                    <ng-option value="MALE">Masculino</ng-option>
+                    <ng-option value="FEMALE">Femenino</ng-option>
+                </ng-select>
+            </div>
+            <div class="form-group">
+                <label for="officeName">*Sucursal:</label>
+                <input type="text" class="form-control" formControlName="officeName" autocomplete="off" [ngClass]="{ 'is-invalid': isValid && form.officeName.errors}" appLetterOnlyDirective maxlength="50">
+            </div>
+            <div class="form-group">
+                <label for="cel">*Teléfono:</label>
+                <input type="text" class="form-control" [ngClass]="{'is-invalid': isValid && form.cel.errors}" formControlName="cel" autocomplete="off" appNumberOnlyDirective maxlength="10">
+            </div>
+            <div class="form-group">
+                <label for="email">*E-mail:</label>
+                <input type="text" class="form-control" formControlName="email" autocomplete="off" [ngClass]="{ 'is-invalid': isValid && form.email.errors}">
+            </div>
+            <div class="form-group">
+                <label for="password">*Contraseña:</label>
+                <input type="password" class="form-control" formControlName="password" [ngClass]="{ 'is-invalid': isValid && form.password.errors}" autocomplete="off" maxlength="100">
+            </div>
+            <div class="form-group mt-5 text-center">
+                <button type="button" class="btn btn-primary btn-lg" (click)="saveUser()">Guardar</button>
+            </div>
+        </form>
+    </div>
+    <p class="text-muted">Los datos con (*) son obligatorios</p>
+</div>

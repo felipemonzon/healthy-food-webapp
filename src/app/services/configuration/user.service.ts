@@ -2,6 +2,7 @@ import { HttpClient, HttpResponse, HttpStatusCode } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { UserInitialModel } from "src/app/models/administration/user.initial.model";
 import { UserModel } from "src/app/models/security/user-model";
+import { SecurityUtilities } from "src/app/security/utils/security.utils";
 import { MessagesConstant } from "src/app/utils/messages-constants";
 import { MessagingNotification } from "src/app/utils/messaging-notification";
 import { environment } from "src/environments/environment";
@@ -40,7 +41,7 @@ export class UserService {
    * Consulta los datos iniciales para la página de creación de usuarios.
    * @returns lista de sucursales y perfiles.
    */
-  public initialData(){
+  public initialData() {
     return this.httpClient.get<UserInitialModel>(this.userInitialDataPath);
   }
 
@@ -127,6 +128,35 @@ export class UserService {
             MessagingNotification.SUCCESS_TYPE,
             MessagesConstant.SUCCESS_TITLE,
             MessagesConstant.DELETE_SUCCESS
+          );
+        } else {
+          MessagingNotification.create(
+            MessagingNotification.WARNING_TYPE,
+            response.body.code as string,
+            response.body.message as string
+          );
+        }
+      });
+  }
+
+  /**
+   * Actualiza los datos del usuario logueado.
+   *
+   * @param user modelo de usuario
+   * @returns status 201 si el usuario se registro con éxito
+   */
+  public saveProfile(user: UserModel) {
+    return this.httpClient
+      .post<HttpResponse<any>>(this.userPath + "/profile", user, {
+        observe: "response",
+      })
+      .subscribe((response: HttpResponse<any>) => {
+        if (response.status === HttpStatusCode.Ok) {
+          SecurityUtilities.setUserData(response.body);
+          MessagingNotification.reaload(
+            MessagingNotification.SUCCESS_TYPE,
+            MessagesConstant.SUCCESS_TITLE,
+            MessagesConstant.SAVE_SUCCESS
           );
         } else {
           MessagingNotification.create(

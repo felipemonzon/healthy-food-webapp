@@ -2,7 +2,7 @@ import { HttpInterceptor,HttpRequest, HttpHandler, HttpEvent, HttpStatusCode } f
 import { Injectable } from "@angular/core";
 import { Observable, throwError } from "rxjs";
 import { catchError } from "rxjs/operators";
-import { LoginService } from "../services/security/login.service";
+import { SecurityUtilities } from "../security/utils/security.utils";
 import { MessagesConstant } from "../utils/messages-constants";
 import { MessagingNotification } from "../utils/messaging-notification";
 
@@ -11,7 +11,7 @@ export class HttpErrorInterceptor implements HttpInterceptor {
   /**
    * Constructor de la clase.
    */
-  constructor(private authService: LoginService) {}
+  constructor(private securityUtils: SecurityUtilities) {}
 
   /**
    * Intercepta las peticiones enviadas al server.
@@ -51,7 +51,7 @@ export class HttpErrorInterceptor implements HttpInterceptor {
               MessagesConstant.FORBIDDEN
             ).then((response) => {              
               if (response) {
-                this.authService.doLogout();
+                this.securityUtils.doLogout();
               }
             });
             break;

@@ -1,10 +1,9 @@
 import { HttpClient, HttpResponse } from "@angular/common/http";
 import { Injectable } from "@angular/core";
 import { environment } from "src/environments/environment";
-import { Router } from "@angular/router";
 import { map } from "rxjs/operators";
 import { UserModel } from "src/app/models/security/user-model";
-import { AuthorityModel } from "src/app/models/administration/authority.model";
+import { SecurityUtilities } from "src/app/security/utils/security.utils";
 
 @Injectable({
   providedIn: "root",
@@ -14,26 +13,17 @@ export class LoginService {
    * URL de login.
    */
   private loginUrl = `${environment.baseUrl}${environment.login}`;
-  /**
-   * Authorization header.
-   */
-  private authorization = "authorization";
-  /**
-   * Propiedad de perfil.
-   */
-  private profile = "profiles";
 
   /**
    * Constructor.
-   * 
+   *
    * @param httpClient cliente http
-   * @param router ruteo
    */
-  constructor(private httpClient: HttpClient, private router: Router) { }
+  constructor(private httpClient: HttpClient) {}
 
   /**
    * Ejecuta servicio de inicio de sesión.
-   * 
+   *
    * @param user {@interface UserModel} user model
    * @returns agrega JWT al header de authorization
    */
@@ -41,54 +31,12 @@ export class LoginService {
     return this.httpClient
       .post(this.loginUrl, user, { observe: "response" })
       .pipe(
-        map((response: HttpResponse<any>) => {    
-          localStorage.setItem(
-            this.authorization,
-            response.headers.get(this.authorization)!
+        map((response: HttpResponse<any>) => {
+          SecurityUtilities.setToken(
+            response.headers.get(SecurityUtilities.authorization) as string
           );
-          localStorage.setItem("displayName", response.body.displayName);
-          localStorage.setItem(
-            this.profile,
-            JSON.stringify(response.body.profiles)
-          );
+          SecurityUtilities.setUserData(response.body);
         })
       );
-  }
-
-  /**
-   * Cierra sesión.
-   */
-  logout() {
-    localStorage.removeItem(this.authorization);
-  }
-
-  /**
-   * Consulta el token de sesión.
-   * 
-   * @returns token de sesión
-   */
-  getToken() {
-    return localStorage.getItem(this.authorization);
-  }
-
-  /**
-   * valida si esta el token en sesión.
-   */
-  get isLoggedIn(): boolean {
-    return localStorage.getItem(this.authorization) !== null;
-  }
-
-  /**
-   * Cierra la sesión.
-   */
-  doLogout() {
-    let removeToken = localStorage.removeItem(this.authorization);
-    if (removeToken == null) {
-      this.router.navigate(["login"]);
-    }
-  }
-
-  getRoles(): AuthorityModel[] {
-    return JSON.parse(localStorage.getItem(this.profile) as string) as AuthorityModel[];
   }
 }
